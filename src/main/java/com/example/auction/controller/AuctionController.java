@@ -3,9 +3,7 @@ package com.example.auction.controller;
 import com.example.auction.entities.Auction;
 import com.example.auction.service.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,12 +15,18 @@ public class AuctionController {
 
     @Autowired
     public AuctionController(AuctionService auctionService) {
-
         this.auctionService = auctionService;
     }
 
     @GetMapping
     public List<Auction> getAuctions() {
+
         return auctionService.getAuctions();
+    }
+
+    @PostMapping
+    public void registerNewAuction(@RequestBody Auction auction){
+
+        auctionService.addNewAuction(auction);
     }
 }

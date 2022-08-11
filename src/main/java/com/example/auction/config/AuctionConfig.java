@@ -13,16 +13,17 @@ import static java.time.Month.JANUARY;
 
 @Configuration
 public class AuctionConfig {
+    private String time = "  20:   20                    ";
     @Bean
     CommandLineRunner auctionCommandLineRunner(
             AuctionRepository auctionRepository) {
         return args -> {
-            Auction firstAuction = new Auction("Calafat",
+            Auction firstAuction = new Auction("TM/001",
                     LocalDate.of(2022, JANUARY, 20),
                     "18:00");
-            Auction secondAuction = new Auction("Craiova",
+            Auction secondAuction = new Auction("TM/002",
                     LocalDate.of(2022, JANUARY, 21),
-                    "19:00");
+                    time.replaceAll("\\s+",""));
 
             auctionRepository.saveAll(List.of(firstAuction, secondAuction));
         };

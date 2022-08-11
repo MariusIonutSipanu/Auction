@@ -1,15 +1,13 @@
 package com.example.auction.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table @Getter @Setter @NoArgsConstructor @ToString //lombok
+@Table @Getter @Setter @NoArgsConstructor @ToString//lombok
 public class Auction {
     @Id
     @SequenceGenerator(name = "auction_sequence",
@@ -29,13 +27,14 @@ public class Auction {
         this.id = id;
         this.location = location;
         this.date = date;
-        this.time = time;
+        this.time = time.replaceAll("\\s+","");
+
     }
 
     public Auction(String location, LocalDate date, String time) {
         this.location = location;
         this.date = date;
-        this.time = time;
+        this.time = time.replaceAll("\\s+","");
     }
 }
 
