@@ -1,23 +1,25 @@
 package com.example.auction.entities;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.sql.Time;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table
+@Getter
+@Setter
+@NoArgsConstructor
 public class Auction {
     @Id
     private Long id;
     private String location;
     private LocalDate date;
     private String time;
-
-    public Auction() {
-    }
 
     public Auction(Long id,
                    String location,
@@ -32,38 +34,6 @@ public class Auction {
     public Auction(String location, LocalDate date, String time) {
         this.location = location;
         this.date = date;
-        this.time = time;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
         this.time = time;
     }
 
