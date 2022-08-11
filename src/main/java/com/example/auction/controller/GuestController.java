@@ -3,9 +3,7 @@ package com.example.auction.controller;
 import com.example.auction.entities.Guest;
 import com.example.auction.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +21,13 @@ public class GuestController {
 
     @GetMapping
     public List<Guest> getGuests() {
-        return guestService.getGuests();
 
+        return guestService.getGuests();
+    }
+
+    @PostMapping
+    public void registerNewGuest(@RequestBody Guest guest) {
+
+        guestService.addNewGuest(guest);
     }
 }
