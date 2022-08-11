@@ -5,15 +5,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
 @Getter @Setter @NoArgsConstructor @ToString //lombok
 public class Guest {
     @Id
+    @SequenceGenerator(name = "guest_sequence",
+            sequenceName = "guest_sequence",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "guest_sequence")
     private Long id;
     private String firstName;
     private String lastName;

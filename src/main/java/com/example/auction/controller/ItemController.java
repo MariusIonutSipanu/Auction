@@ -1,6 +1,5 @@
 package com.example.auction.controller;
 
-import com.example.auction.entities.Currency;
 import com.example.auction.entities.Item;
 import com.example.auction.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ public class ItemController {
 
     @Autowired
     public ItemController(ItemService itemService) {
+
         this.itemService = itemService;
     }
 

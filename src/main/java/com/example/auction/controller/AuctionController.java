@@ -17,6 +17,7 @@ public class AuctionController {
 
     @Autowired
     public AuctionController(AuctionService auctionService) {
+
         this.auctionService = auctionService;
     }
 

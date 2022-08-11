@@ -5,16 +5,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table
-@Getter @Setter @NoArgsConstructor @ToString //lombok
+@Table @Getter @Setter @NoArgsConstructor @ToString //lombok
 public class Auction {
     @Id
+    @SequenceGenerator(name = "auction_sequence",
+            sequenceName = "auction_sequence",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "auction_sequence")
     private Long id;
     private String location;
     private LocalDate date;
