@@ -11,8 +11,7 @@ import java.util.List;
 public class ItemConfig {
 
     @Bean
-    CommandLineRunner itemCommandLineRunner(
-            ItemRepository itemRepository) {
+    CommandLineRunner itemCommandLineRunner(ItemRepository itemRepository) {
 
         return args -> {
             Item firstItem = new Item("Silver chair", 3000.50);
