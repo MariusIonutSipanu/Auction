@@ -32,4 +32,13 @@ public class GuestService {
         }
         guestRepository.save(guest);
     }
+
+    public void deleteGuest(Long guestId) {
+        boolean exists = guestRepository.existsById(guestId);
+        if (!exists) {
+            throw new IllegalStateException
+                    ("Guest with ID " + guestId + " does not exist.");
+        }
+        guestRepository.deleteById(guestId);
+    }
 }

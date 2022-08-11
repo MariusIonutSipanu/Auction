@@ -24,7 +24,7 @@ public class AuctionService {
     }
 
     public void addNewAuction(Auction newAuction) {
-        String trimmed = newAuction.getTime().replaceAll("\\s+","");
+        String trimmed = newAuction.getTime().replaceAll("\\s+", "");
         newAuction.setTime(trimmed);
         Optional<Auction> auctionOptional = auctionRepository.
                 findAuctionByLocationAndTime(newAuction.getLocation(), newAuction.getTime());
@@ -32,5 +32,14 @@ public class AuctionService {
             throw new IllegalStateException("Auction at inputted location and time already exists.");
         }
         auctionRepository.save(newAuction);
+    }
+
+    public void deleteAuction(Long auctionId) {
+        boolean exists = auctionRepository.existsById(auctionId);
+        if (!exists) {
+            throw new IllegalStateException
+                    ("Auction with ID " + auctionId + " does not exist.");
+        }
+        auctionRepository.deleteById(auctionId);
     }
 }

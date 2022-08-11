@@ -25,8 +25,13 @@ public class AuctionController {
     }
 
     @PostMapping
-    public void registerNewAuction(@RequestBody Auction auction){
+    public void registerNewAuction(@RequestBody Auction auction) {
 
         auctionService.addNewAuction(auction);
+    }
+
+    @DeleteMapping(path = "{auctionId}")
+    public void deleteAuction(@PathVariable("auctionId") Long auctionId) {
+        auctionService.deleteAuction(auctionId);
     }
 }
