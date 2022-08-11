@@ -3,6 +3,7 @@ package com.example.auction.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,9 +12,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table
-@Getter
-@Setter
-@NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @ToString //lombok
 public class Auction {
     @Id
     private Long id;
@@ -35,16 +34,6 @@ public class Auction {
         this.location = location;
         this.date = date;
         this.time = time;
-    }
-
-    @Override
-    public String toString() {
-        return "Auction{" +
-                "id=" + id +
-                ", location='" + location + '\'' +
-                ", date=" + date +
-                ", time='" + time + '\'' +
-                '}';
     }
 }
 
