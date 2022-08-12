@@ -9,7 +9,10 @@ import javax.persistence.*;
 
 @Entity
 @Table
-@Getter @Setter @NoArgsConstructor @ToString //lombok
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString //lombok
 public class Item {
     @Id
     @SequenceGenerator(name = "item_sequence",
@@ -21,6 +24,9 @@ public class Item {
     private String name;
     private double startingBid;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "auction_id", referencedColumnName = "id")
+    private Auction auction;
 
     public Item(Long id, String name, double startingBid) {
         this.id = id;
@@ -33,4 +39,25 @@ public class Item {
         this.startingBid = startingBid;
     }
 
+    public void setName(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalStateException("Invalid input");
+        }
+        this.name = name;
+    }
+
+    public void setStartingBid(double startingBid) {
+        if (startingBid <= 0) {
+            throw new IllegalStateException("Invalid input");
+        }
+        this.startingBid = startingBid;
+    }
+
+    public Auction getAuction() {
+        return auction;
+    }
+
+    public void assignAuction(Auction auction) {
+        this.auction = auction;
+    }
 }

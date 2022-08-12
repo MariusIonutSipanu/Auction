@@ -15,7 +15,7 @@ public class GuestConfig {
     CommandLineRunner guestCommandLineRunner(
             GuestRepository guestRepository) {
         return args -> {
-            Guest marius = new Guest("Marius", "Sipanu", 50000.1231);
+            Guest marius = new Guest("Marius", "Andrei", 50000.1231);
 
             guestRepository.saveAll(List.of(marius));
         };

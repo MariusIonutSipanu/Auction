@@ -18,10 +18,10 @@ public class AuctionConfig {
     CommandLineRunner auctionCommandLineRunner(
             AuctionRepository auctionRepository) {
         return args -> {
-            Auction firstAuction = new Auction("TM/001",
+            Auction firstAuction = new Auction("Timisoara",
                     LocalDate.of(2022, JANUARY, 20),
                     "18:00");
-            Auction secondAuction = new Auction("TM/002",
+            Auction secondAuction = new Auction("Craiova",
                     LocalDate.of(2022, JANUARY, 21),
                     time.replaceAll("\\s+",""));
 

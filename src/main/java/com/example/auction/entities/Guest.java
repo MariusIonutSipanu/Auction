@@ -9,7 +9,10 @@ import javax.persistence.*;
 
 @Entity
 @Table
-@Getter @Setter @NoArgsConstructor @ToString //lombok
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString //lombok
 public class Guest {
     @Id
     @SequenceGenerator(name = "guest_sequence",
@@ -32,6 +35,27 @@ public class Guest {
     public Guest(String firstName, String lastName, double cash) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.cash = cash;
+    }
+
+    public void setFirstName(String firstName) {
+        if (firstName == null || firstName.isEmpty()) {
+            throw new IllegalStateException("Invalid input");
+        }
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        if (lastName == null || lastName.isEmpty()) {
+            throw new IllegalStateException("Invalid input");
+        }
+        this.lastName = lastName;
+    }
+
+    public void setCash(double cash) {
+        if (cash <= 0) {
+            throw new IllegalStateException("Invalid input");
+        }
         this.cash = cash;
     }
 }

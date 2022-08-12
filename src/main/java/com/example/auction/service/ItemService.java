@@ -1,6 +1,5 @@
 package com.example.auction.service;
 
-import com.example.auction.entities.Guest;
 import com.example.auction.entities.Item;
 import com.example.auction.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +52,8 @@ public class ItemService {
         if (currentBid != null && (item.getStartingBid() != currentBid)) {
             item.setStartingBid(currentBid);
         }
+    }
+
+    public void addItemToAuction(Long itemId, Long auctionId) {
     }
 }
