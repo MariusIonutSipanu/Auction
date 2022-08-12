@@ -35,4 +35,11 @@ public class ItemController {
             itemService.deleteItem(itemId);
     }
 
+    @PutMapping(path = "{itemId}")
+    public void updateItem(@PathVariable("itemId") Long itemId,
+                              @RequestParam(required = false) Double currentBid)
+    {
+        itemService.updateItem(itemId, currentBid);
+    }
+
 }

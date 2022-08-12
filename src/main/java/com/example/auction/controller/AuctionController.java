@@ -3,8 +3,10 @@ package com.example.auction.controller;
 import com.example.auction.entities.Auction;
 import com.example.auction.service.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -33,5 +35,14 @@ public class AuctionController {
     @DeleteMapping(path = "{auctionId}")
     public void deleteAuction(@PathVariable("auctionId") Long auctionId) {
         auctionService.deleteAuction(auctionId);
+    }
+
+    @PutMapping(path = "{auctionId}")
+    public void updateAuction(@PathVariable("auctionId") Long auctionId,
+                              @RequestParam(required = false) String date,
+                              @RequestParam(required = false) String time)
+    {
+        LocalDate localDate = LocalDate.parse(date);
+        auctionService.updateAuction(auctionId, localDate, time);
     }
 }

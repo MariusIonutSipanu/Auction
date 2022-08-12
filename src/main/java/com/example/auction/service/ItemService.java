@@ -1,10 +1,12 @@
 package com.example.auction.service;
 
+import com.example.auction.entities.Guest;
 import com.example.auction.entities.Item;
 import com.example.auction.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,5 +40,18 @@ public class ItemService {
                     ("Item with ID " + itemId + " does not exist.");
         }
         itemRepository.deleteById(itemId);
+    }
+
+    @Transactional
+    public void updateItem(Long itemId, Double currentBid) {
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Item with ID " + itemId + " does not exist."));
+        if (currentBid < 0) {
+            throw new IllegalStateException("Bid cannot be lower than 0.");
+        }
+        if (currentBid != null && (item.getStartingBid() != currentBid)) {
+            item.setStartingBid(currentBid);
+        }
     }
 }

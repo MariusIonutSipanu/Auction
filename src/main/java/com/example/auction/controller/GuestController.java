@@ -5,6 +5,7 @@ import com.example.auction.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -34,5 +35,12 @@ public class GuestController {
     @DeleteMapping(path = "{guestId}")
     public void deleteGuest(@PathVariable("guestId") Long guestId) {
         guestService.deleteGuest(guestId);
+    }
+
+    @PutMapping(path = "{guestId}")
+    public void updateGuest(@PathVariable("guestId") Long guestId,
+                              @RequestParam(required = false) Double cash)
+    {
+        guestService.updateGuest(guestId, cash);
     }
 }
