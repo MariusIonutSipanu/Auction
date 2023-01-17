@@ -29,8 +29,7 @@ public class AuctionService {
     public void addNewAuction(Auction newAuction) {
         String trimmed = newAuction.getTime().replaceAll("\\s+", "");
         newAuction.setTime(trimmed);
-        Optional<Auction> auctionOptional = auctionRepository.
-                findAuctionByLocationAndTime(newAuction.getLocation(), newAuction.getTime());
+        Optional<Auction> auctionOptional = auctionRepository.findAuctionByLocationAndTime(newAuction.getLocation(), newAuction.getTime());
         if (auctionOptional.isPresent()) { // ADD MORE VALIDATION!!
             throw new IllegalStateException("Auction at inputted location and time already exists.");
         }
@@ -40,26 +39,19 @@ public class AuctionService {
     public void deleteAuction(Long auctionId) {
         boolean exists = auctionRepository.existsById(auctionId);
         if (!exists) {
-            throw new IllegalStateException
-                    ("Auction with ID " + auctionId + " does not exist.");
+            throw new IllegalStateException("Auction with ID " + auctionId + " does not exist.");
         }
         auctionRepository.deleteById(auctionId);
     }
 
     @Transactional
-    public void updateAuction(Long auctionId,
-                              LocalDate date,
-                              String time) {
-        Auction auction = auctionRepository.findById(auctionId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "Auction with ID " + auctionId + " does not exist."
-                ));
+    public void updateAuction(Long auctionId, LocalDate date, String time) {
+        Auction auction = auctionRepository.findById(auctionId).orElseThrow(() -> new IllegalStateException("Auction with ID " + auctionId + " does not exist."));
         if (date != null && !Objects.equals(auction.getDate(), date)) {
             auction.setDate(date);
         }
 
-        if (time != null && time.length() > 0 &&
-                !Objects.equals(auction.getTime(), time)) {
+        if (time != null && time.length() > 0 && !Objects.equals(auction.getTime(), time)) {
             auction.setTime(time);
         }
     }

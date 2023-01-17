@@ -28,8 +28,7 @@ public class GuestService {
     }
 
     public void addNewGuest(Guest guest) {
-        Optional<Guest> guestOptional = guestRepository.
-                findGuestByFirstNameAndLastName(guest.getFirstName(), guest.getLastName());
+        Optional<Guest> guestOptional = guestRepository.findGuestByFirstNameAndLastName(guest.getFirstName(), guest.getLastName());
         if (guestOptional.isPresent()) { // ADD MORE VALIDATION!!
             throw new IllegalStateException("Guest already exists in table.");
         }
@@ -39,17 +38,14 @@ public class GuestService {
     public void deleteGuest(Long guestId) {
         boolean exists = guestRepository.existsById(guestId);
         if (!exists) {
-            throw new IllegalStateException
-                    ("Guest with ID " + guestId + " does not exist.");
+            throw new IllegalStateException("Guest with ID " + guestId + " does not exist.");
         }
         guestRepository.deleteById(guestId);
     }
 
     @Transactional
     public void updateGuest(Long guestId, Double cash) {
-        Guest guest = guestRepository.findById(guestId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "Guest with ID " + guestId + " does not exist."));
+        Guest guest = guestRepository.findById(guestId).orElseThrow(() -> new IllegalStateException("Guest with ID " + guestId + " does not exist."));
         if (cash < 0) {
             throw new IllegalStateException("Cash cannot be lower than 0.");
         }

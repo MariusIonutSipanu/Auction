@@ -24,8 +24,7 @@ public class ItemService {
     }
 
     public void addNewItem(Item item) {
-        Optional<Item> itemOptional = itemRepository.
-                findItemByName(item.getName());
+        Optional<Item> itemOptional = itemRepository.findItemByName(item.getName());
         if (itemOptional.isPresent()) { // ADD MORE VALIDATION!!
             throw new IllegalStateException("Item already exists.");
         }
@@ -35,17 +34,14 @@ public class ItemService {
     public void deleteItem(Long itemId) {
         boolean exists = itemRepository.existsById(itemId);
         if (!exists) {
-            throw new IllegalStateException
-                    ("Item with ID " + itemId + " does not exist.");
+            throw new IllegalStateException("Item with ID " + itemId + " does not exist.");
         }
         itemRepository.deleteById(itemId);
     }
 
     @Transactional
     public void updateItem(Long itemId, Double currentBid) {
-        Item item = itemRepository.findById(itemId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "Item with ID " + itemId + " does not exist."));
+        Item item = itemRepository.findById(itemId).orElseThrow(() -> new IllegalStateException("Item with ID " + itemId + " does not exist."));
         if (currentBid < 0) {
             throw new IllegalStateException("Bid cannot be lower than 0.");
         }

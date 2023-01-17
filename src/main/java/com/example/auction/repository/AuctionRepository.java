@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface AuctionRepository extends JpaRepository<Auction, Long> {
 
-   // @Query("SELECT s FROM Auction s WHERE s.location = ?1")
+    // @Query("SELECT s FROM Auction s WHERE s.location = ?1")
     Optional<Auction> findAuctionByLocationAndTime(String location, String time);
 }

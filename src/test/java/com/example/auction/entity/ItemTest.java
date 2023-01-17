@@ -1,4 +1,5 @@
 package com.example.auction.entity;
+
 import com.example.auction.entities.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,10 +18,7 @@ public class ItemTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {
-            "gold  ",
-            "   gold"
-    })
+    @CsvSource(value = {"gold  ", "   gold"})
     void nameShouldNotBeDifferentFromInput(String name) {
         item.setName(name);
         assertThat(item.getName()).isEqualTo(name);
@@ -28,14 +26,11 @@ public class ItemTest {
 
     @Test
     void nameShouldThrowExceptionIfNull() {
-        assertThatThrownBy(() -> item.setName(null))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Invalid input");
+        assertThatThrownBy(() -> item.setName(null)).isInstanceOf(RuntimeException.class).hasMessageContaining("Invalid input");
     }
 
     @ParameterizedTest
-    @CsvSource(value = { "102.2", "201.5", "201.5321"
-    })
+    @CsvSource(value = {"102.2", "201.5", "201.5321"})
     void startingBigShouldNotBeDifferentFromInput(String bid) {
         item.setStartingBid(Double.valueOf(bid));
         assertThat(item.getStartingBid() == Double.valueOf(bid));
@@ -43,9 +38,7 @@ public class ItemTest {
 
     @Test
     void startingBidShouldThrowExceptionIfSmallerEqualTo0() {
-        assertThatThrownBy(() -> item.setStartingBid(0))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Invalid input");
+        assertThatThrownBy(() -> item.setStartingBid(0)).isInstanceOf(RuntimeException.class).hasMessageContaining("Invalid input");
     }
 
 

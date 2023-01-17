@@ -38,10 +38,7 @@ public class AuctionController {
     }
 
     @PutMapping(path = "{auctionId}")
-    public void updateAuction(@PathVariable("auctionId") Long auctionId,
-                              @RequestParam(required = false) String date,
-                              @RequestParam(required = false) String time)
-    {
+    public void updateAuction(@PathVariable("auctionId") Long auctionId, @RequestParam(required = false) String date, @RequestParam(required = false) String time) {
         LocalDate localDate = LocalDate.parse(date);
         auctionService.updateAuction(auctionId, localDate, time);
     }

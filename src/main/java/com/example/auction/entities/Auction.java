@@ -19,11 +19,8 @@ import java.util.Set;
 @ToString//lombok
 public class Auction {
     @Id
-    @SequenceGenerator(name = "auction_sequence",
-            sequenceName = "auction_sequence",
-            allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "auction_sequence")
+    @SequenceGenerator(name = "auction_sequence", sequenceName = "auction_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "auction_sequence")
     private Long id;
     private String location;
     private LocalDate date;
@@ -34,10 +31,7 @@ public class Auction {
     @OneToMany(mappedBy = "auction")
     private Set<Item> items = new HashSet<>();
 
-    public Auction(Long id,
-                   String location,
-                   LocalDate date,
-                   String time) {
+    public Auction(Long id, String location, LocalDate date, String time) {
         this.id = id;
         this.location = location;
         this.date = date;

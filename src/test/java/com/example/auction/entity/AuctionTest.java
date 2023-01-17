@@ -21,10 +21,7 @@ public class AuctionTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {
-            "location  ",
-            "   location"
-    })
+    @CsvSource(value = {"location  ", "   location"})
     void locationShouldNotBeDifferentFromInput(String location) {
         auction.setLocation(location);
         assertThat(auction.getLocation()).isEqualTo(location);
@@ -32,17 +29,11 @@ public class AuctionTest {
 
     @Test
     void locationShouldThrowExceptionIfNull() {
-        assertThatThrownBy(() -> auction.setLocation(null))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Invalid input");
+        assertThatThrownBy(() -> auction.setLocation(null)).isInstanceOf(RuntimeException.class).hasMessageContaining("Invalid input");
     }
 
     @ParameterizedTest
-    @CsvSource(value = {
-            "18:00",
-            "18:00    ",
-            "   18:00"
-    })
+    @CsvSource(value = {"18:00", "18:00    ", "   18:00"})
     void timeShouldNotBeDifferentFromInput(String time) {
         auction.setTime(time);
         assertThat(auction.getTime()).isEqualTo(time);
@@ -50,21 +41,17 @@ public class AuctionTest {
 
     @Test
     void timeShouldThrowExceptionIfNull() {
-        assertThatThrownBy(() -> auction.setTime(null))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Invalid input");
+        assertThatThrownBy(() -> auction.setTime(null)).isInstanceOf(RuntimeException.class).hasMessageContaining("Invalid input");
     }
 
     @Test
     void dateShouldNotBeDifferentFromInput() {
         auction.setDate(LocalDate.of(2010, Month.JANUARY, 10));
-        assertThat(auction.getDate()).isEqualTo(LocalDate.of(2010,
-                Month.JANUARY, 10));
+        assertThat(auction.getDate()).isEqualTo(LocalDate.of(2010, Month.JANUARY, 10));
     }
 
     @Test
     void dateShouldThrowExceptionIfNull() {
-        assertThatThrownBy(() -> auction.setDate(null))
-                .hasMessageContaining("Invalid input");
+        assertThatThrownBy(() -> auction.setDate(null)).hasMessageContaining("Invalid input");
     }
 }

@@ -19,22 +19,14 @@ public class GuestTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {
-            "Marius    ",
-            "andrei",
-            "    Andreea"
-    })
+    @CsvSource(value = {"Marius    ", "andrei", "    Andreea"})
     public void firstNameShouldNotBeDifferentFromInput(String firstName) {
         guest.setFirstName(firstName);
         assertThat(guest.getFirstName()).isEqualTo(firstName);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {
-            "Popescu",
-            "            Ionescu",
-            "Dumitrascu   "
-    })
+    @CsvSource(value = {"Popescu", "            Ionescu", "Dumitrascu   "})
     public void lastNameShouldNotBeDifferentFromInput(String lastName) {
         guest.setLastName(lastName);
         assertThat(guest.getLastName()).isEqualTo(lastName);
@@ -42,23 +34,17 @@ public class GuestTest {
 
     @Test
     public void firstNameShouldNotBeNull() {
-        assertThatThrownBy(() -> guest.setFirstName(null))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Invalid input");
+        assertThatThrownBy(() -> guest.setFirstName(null)).isInstanceOf(RuntimeException.class).hasMessageContaining("Invalid input");
     }
 
     @Test
     public void lastNameShouldNotBeNull() {
-        assertThatThrownBy(() -> guest.setLastName(""))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Invalid input");
+        assertThatThrownBy(() -> guest.setLastName("")).isInstanceOf(RuntimeException.class).hasMessageContaining("Invalid input");
     }
 
     @Test
-    public void cashShouldBeGreaterThan0(){
-        assertThatThrownBy(() -> guest.setCash(0))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Invalid input");
+    public void cashShouldBeGreaterThan0() {
+        assertThatThrownBy(() -> guest.setCash(0)).isInstanceOf(RuntimeException.class).hasMessageContaining("Invalid input");
     }
-    }
+}
 

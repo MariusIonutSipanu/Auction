@@ -15,11 +15,8 @@ import javax.persistence.*;
 @ToString //lombok
 public class Guest {
     @Id
-    @SequenceGenerator(name = "guest_sequence",
-            sequenceName = "guest_sequence",
-            allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "guest_sequence")
+    @SequenceGenerator(name = "guest_sequence", sequenceName = "guest_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "guest_sequence")
     private Long id;
     private String firstName;
     private String lastName;
