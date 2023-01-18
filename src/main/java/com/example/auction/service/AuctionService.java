@@ -33,8 +33,8 @@ public class AuctionService {
 
     public void addNewAuction(Auction newAuction) {
         String trimmed = newAuction.getTime().replaceAll("\\s+", "");
-        if (!(trimmed.contains(":"))) {
-            throw new InvalidInputException("Invalid time input. Time should be of format hh:mm");
+        if (!trimmed.contains(":")) {
+            throw new InvalidInputException("Invalid input. Time should be of format hh:mm");
         }
         newAuction.setTime(trimmed);
 
