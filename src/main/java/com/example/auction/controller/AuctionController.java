@@ -20,23 +20,27 @@ public class AuctionController {
         this.auctionService = auctionService;
     }
 
+    //print
     @GetMapping
     public List<Auction> getAuctions() {
 
         return auctionService.getAuctions();
     }
 
+    //add
     @PostMapping
     public void registerNewAuction(@RequestBody Auction auction) {
 
         auctionService.addNewAuction(auction);
     }
 
+    //delete
     @DeleteMapping(path = "{auctionId}")
     public void deleteAuction(@PathVariable("auctionId") Long auctionId) {
         auctionService.deleteAuction(auctionId);
     }
 
+    //update
     @PutMapping(path = "{auctionId}")
     public void updateAuction(@PathVariable("auctionId") Long auctionId, @RequestParam(required = false) String date, @RequestParam(required = false) String time) {
         LocalDate localDate = LocalDate.parse(date);
