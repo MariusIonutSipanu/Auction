@@ -1,5 +1,6 @@
 package com.example.auction.service;
 
+import com.example.auction.Exceptions.IdNotFoundException;
 import com.example.auction.entities.Auction;
 import com.example.auction.entities.Guest;
 import com.example.auction.repository.GuestRepository;
@@ -38,14 +39,14 @@ public class GuestService {
     public void deleteGuest(Long guestId) {
         boolean exists = guestRepository.existsById(guestId);
         if (!exists) {
-            throw new IllegalStateException("Guest with ID " + guestId + " does not exist.");
+            throw new IdNotFoundException("Guest with ID " + guestId + " does not exist.");
         }
         guestRepository.deleteById(guestId);
     }
 
     @Transactional
     public void updateGuest(Long guestId, Double cash) {
-        Guest guest = guestRepository.findById(guestId).orElseThrow(() -> new IllegalStateException("Guest with ID " + guestId + " does not exist."));
+        Guest guest = guestRepository.findById(guestId).orElseThrow(() -> new IdNotFoundException("Guest with ID " + guestId + " does not exist."));
         if (cash < 0) {
             throw new IllegalStateException("Cash cannot be lower than 0.");
         }
