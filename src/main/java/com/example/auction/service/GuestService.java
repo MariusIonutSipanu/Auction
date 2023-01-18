@@ -31,10 +31,15 @@ public class GuestService {
     }
 
     public void addNewGuest(Guest guest) {
-        Optional<Guest> guestOptional = guestRepository.findGuestByFirstNameAndLastName(guest.getFirstName(), guest.getLastName());
+        if (guest.getCash() < 0) {
+            throw new InvalidInputException("Cash cannot be lower than 0");
+        }
+        Optional<Guest> guestOptional = guestRepository.
+                findGuestByFirstNameAndLastName(guest.getFirstName(), guest.getLastName());
         if (guestOptional.isPresent()) { // ADD MORE VALIDATION!!
             throw new ObjectAlreadyExistsException("Guest already exists in table.");
         }
+
         guestRepository.save(guest);
     }
 
@@ -48,11 +53,11 @@ public class GuestService {
 
     @Transactional
     public void updateGuest(Long guestId, Double cash) {
-        Guest guest = guestRepository.findById(guestId).orElseThrow(() -> new IdNotFoundException("Guest with ID " + guestId + " does not exist."));
+        Guest guest = guestRepository.findById(guestId).orElseThrow(() ->
+                new IdNotFoundException("Guest with ID " + guestId + " does not exist."));
         if (cash < 0) {
             throw new InvalidInputException("Cash cannot be lower than 0.");
-        }
-        if (cash != null && (guest.getCash() != cash)) {
+        } else if (cash != null && (guest.getCash() != cash)) {
             guest.setCash(cash);
         }
     }

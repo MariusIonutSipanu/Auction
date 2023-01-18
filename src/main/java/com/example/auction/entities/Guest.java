@@ -51,8 +51,8 @@ public class Guest {
     }
 
     public void setCash(double cash) {
-        if (cash <= 0) {
-            throw new InvalidInputException("Invalid input");
+        if (cash < 0) {
+            throw new InvalidInputException("Invalid input: cash cannot be lower than 0");
         }
         this.cash = cash;
     }

@@ -14,6 +14,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.List;
+
 
 @Service
 public class AuctionService {
@@ -31,7 +33,11 @@ public class AuctionService {
 
     public void addNewAuction(Auction newAuction) {
         String trimmed = newAuction.getTime().replaceAll("\\s+", "");
+        if (!(trimmed.contains(":"))) {
+            throw new InvalidInputException("Invalid time input. Time should be of format hh:mm");
+        }
         newAuction.setTime(trimmed);
+
         Optional<Auction> auctionOptional = auctionRepository.findAuctionByLocationAndTime(newAuction.getLocation(), newAuction.getTime());
         if (auctionOptional.isPresent()) { // ADD MORE VALIDATION!!
             throw new ObjectAlreadyExistsException("Auction at inputted location and time already exists.");
