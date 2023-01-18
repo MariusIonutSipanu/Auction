@@ -1,5 +1,6 @@
 package com.example.auction.entities;
 
+import com.example.auction.Exceptions.InvalidInputException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,21 +38,21 @@ public class Guest {
 
     public void setFirstName(String firstName) {
         if (firstName == null || firstName.isEmpty()) {
-            throw new IllegalStateException("Invalid input");
+            throw new InvalidInputException("Invalid input");
         }
         this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
         if (lastName == null || lastName.isEmpty()) {
-            throw new IllegalStateException("Invalid input");
+            throw new InvalidInputException("Invalid input");
         }
         this.lastName = lastName;
     }
 
     public void setCash(double cash) {
         if (cash <= 0) {
-            throw new IllegalStateException("Invalid input");
+            throw new InvalidInputException("Invalid input");
         }
         this.cash = cash;
     }

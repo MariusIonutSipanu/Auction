@@ -1,6 +1,7 @@
 package com.example.auction.service;
 
 import com.example.auction.Exceptions.IdNotFoundException;
+import com.example.auction.Exceptions.InvalidInputException;
 import com.example.auction.Exceptions.ObjectAlreadyExistsException;
 import com.example.auction.entities.Auction;
 import com.example.auction.entities.Item;
@@ -55,7 +56,8 @@ public class AuctionService {
         }
 
         if (time != null && time.length() > 0 && !Objects.equals(auction.getTime(), time)) {
-            auction.setTime(time);
+            String trimmed = time.replaceAll("\\s+", "");
+            auction.setTime(trimmed);
         }
     }
 }

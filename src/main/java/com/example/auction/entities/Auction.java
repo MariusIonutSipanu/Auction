@@ -1,5 +1,6 @@
 package com.example.auction.entities;
 
+import com.example.auction.Exceptions.InvalidInputException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -51,21 +52,21 @@ public class Auction {
 
     public void setLocation(String location) {
         if (location == null || location.isEmpty()) {
-            throw new IllegalStateException("Invalid input");
+            throw new InvalidInputException("Invalid input");
         }
         this.location = location;
     }
 
     public void setTime(String time) {
         if (time == null || time.isEmpty()) {
-            throw new IllegalStateException("Invalid input");
+            throw new InvalidInputException("Invalid input");
         }
         this.time = time;
     }
 
     public void setDate(LocalDate date) {
         if (date == null) {
-            throw new IllegalStateException("Invalid input");
+            throw new InvalidInputException("Invalid input");
         }
         this.date = date;
     }

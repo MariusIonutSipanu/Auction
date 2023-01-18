@@ -48,8 +48,10 @@ public class ItemService {
         if (currentBid < 0) {
             throw new InvalidInputException("Bid cannot be lower than 0.");
         }
-        if (currentBid != null && (item.getStartingBid() != currentBid)) {
+        if (currentBid != null && (item.getStartingBid() < currentBid)) {
             item.setStartingBid(currentBid);
+        } else {
+            throw new InvalidInputException("New bid cannot be lower than starting bid.");
         }
     }
 
