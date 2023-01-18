@@ -1,6 +1,7 @@
 package com.example.auction.service;
 
 import com.example.auction.Exceptions.IdNotFoundException;
+import com.example.auction.Exceptions.ObjectAlreadyExistsException;
 import com.example.auction.entities.Auction;
 import com.example.auction.entities.Item;
 import com.example.auction.repository.AuctionRepository;
@@ -32,7 +33,7 @@ public class AuctionService {
         newAuction.setTime(trimmed);
         Optional<Auction> auctionOptional = auctionRepository.findAuctionByLocationAndTime(newAuction.getLocation(), newAuction.getTime());
         if (auctionOptional.isPresent()) { // ADD MORE VALIDATION!!
-            throw new IllegalStateException("Auction at inputted location and time already exists.");
+            throw new ObjectAlreadyExistsException("Auction at inputted location and time already exists.");
         }
         auctionRepository.save(newAuction);
     }
@@ -40,14 +41,15 @@ public class AuctionService {
     public void deleteAuction(Long auctionId) {
         boolean exists = auctionRepository.existsById(auctionId);
         if (!exists) {
-            throw new IdNotFoundException("Auction with the ID " + auctionId + " does not exist.");
+            throw new IdNotFoundException("Auction with the ID " + auctionId + " does not exist.", new RuntimeException());
         }
         auctionRepository.deleteById(auctionId);
     }
 
     @Transactional
     public void updateAuction(Long auctionId, LocalDate date, String time) {
-        Auction auction = auctionRepository.findById(auctionId).orElseThrow(() -> new IdNotFoundException("Auction with the  ID " + auctionId + " does not exist."));
+        Auction auction = auctionRepository.findById(auctionId).orElseThrow(() ->
+                new IdNotFoundException("Auction with the  ID " + auctionId + " does not exist.", new RuntimeException()));
         if (date != null && !Objects.equals(auction.getDate(), date)) {
             auction.setDate(date);
         }

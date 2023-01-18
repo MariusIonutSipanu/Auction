@@ -1,5 +1,8 @@
 package com.example.auction.service;
 
+import com.example.auction.Exceptions.IdNotFoundException;
+import com.example.auction.Exceptions.InvalidInputException;
+import com.example.auction.Exceptions.ObjectAlreadyExistsException;
 import com.example.auction.entities.Item;
 import com.example.auction.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +29,7 @@ public class ItemService {
     public void addNewItem(Item item) {
         Optional<Item> itemOptional = itemRepository.findItemByName(item.getName());
         if (itemOptional.isPresent()) { // ADD MORE VALIDATION!!
-            throw new IllegalStateException("Item already exists.");
+            throw new ObjectAlreadyExistsException("Item already exists.");
         }
         itemRepository.save(item);
     }
@@ -34,16 +37,16 @@ public class ItemService {
     public void deleteItem(Long itemId) {
         boolean exists = itemRepository.existsById(itemId);
         if (!exists) {
-            throw new IllegalStateException("Item with ID " + itemId + " does not exist.");
+            throw new IdNotFoundException("Item with ID " + itemId + " does not exist.");
         }
         itemRepository.deleteById(itemId);
     }
 
     @Transactional
     public void updateItem(Long itemId, Double currentBid) {
-        Item item = itemRepository.findById(itemId).orElseThrow(() -> new IllegalStateException("Item with ID " + itemId + " does not exist."));
+        Item item = itemRepository.findById(itemId).orElseThrow(() -> new IdNotFoundException("Item with ID " + itemId + " does not exist."));
         if (currentBid < 0) {
-            throw new IllegalStateException("Bid cannot be lower than 0.");
+            throw new InvalidInputException("Bid cannot be lower than 0.");
         }
         if (currentBid != null && (item.getStartingBid() != currentBid)) {
             item.setStartingBid(currentBid);
